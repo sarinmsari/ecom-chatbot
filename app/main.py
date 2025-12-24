@@ -3,6 +3,7 @@ import streamlit as st
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+from sql import sql_chain
 
 env_path = Path(__file__).parent / ".env"
 load_dotenv(dotenv_path=env_path)
@@ -21,6 +22,8 @@ def ask(query):
     route = router(query).name
     if route=='faq':
         return faq_chain(query)
+    elif route == 'sql':
+        return sql_chain(query)
     else:
         return f"Route {route} not implemented yet"
 
